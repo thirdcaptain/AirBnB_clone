@@ -2,17 +2,21 @@
 """create a class that defines all common attributes/methods for others"""
 import uuid
 from datetime import datetime
-import dateutil.parser
-
 
 class BaseModel:
     """writing a base class"""
 
-    def __init__(self, id=None):
+    def __init__(self, *args, **kwargs):
         """constructor"""
-        self.id = str(uuid.uuid4())
-        self.created_at = dateutil.parser.parse(created_at)
-        self.updated_at = dateutil.parser.parse(updated_at)
+        list = ["id", "created_at"]
+        if kwargs:
+            for key, value in kwargs.items():
+                if key in list:
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+        self.updated_at = datetime.now()
 
     def __str__(self):
         """returns a readable string"""
