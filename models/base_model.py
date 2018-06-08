@@ -2,6 +2,8 @@
 """create a class that defines all common attributes/methods for others"""
 import uuid
 from datetime import datetime
+import storage
+
 
 class BaseModel:
     """writing a base class"""
@@ -16,6 +18,7 @@ class BaseModel:
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
+            storage.new(self)
         self.updated_at = datetime.now()
 
     def __str__(self):
@@ -25,9 +28,10 @@ class BaseModel:
     def save(self):
         """updates updated_at"""
         self.updated_at = datetime.now()
+        storage.save(self)
 
     def to_dict(self):
         """returns a dictionary containing all keys/values"""
         self.created_at = self.created_at.isoformat()
         self.updated_at = self.updated_at.isoformat()
-        return self.__dict__
+        return {__class__.__name__.id: self.__dict__}
