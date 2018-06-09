@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """creating a file storage"""
 import json
-#import os
+from models.base_model import BaseModel
 
 class FileStorage:
     """a new class that serializes instances to a JSON file and back"""
@@ -11,25 +11,33 @@ class FileStorage:
     def __init__(self, *args, **kwargs):
         """constructor"""
         pass
-    
+
     def all(self):
         """"""
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """"""
-        self.__objects[obj.__class__.__name__ + obj.id] = obj
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        self.__objects[key] = obj
 
     def save(self):
         """"""
-        with open(type(self).__file_path, "w") as f:
-            f.write(json.dumps(type(self).__objects))
+        new_dict = {}
+        for key, obj in self.__objects.items():
+            new_dict[key] = obj
+        with open(self.__file_path, "a") as f:
+            json.dumps(new_dict, f)
 
     def reload(self):
         """"""
+        load_dict = {}
         try:
-            with open(type(self).__file_path, "r") as f:
-                json.loads(f)
+            with open(self.__file_path, "r") as f:
+                load_dict = json.load(f)
+                for key, value in load_dict.items():
+                    obj = BaseModel(**value)
+                    self.__object[key] = obj
         except:
             pass
         #       if os.path.isfile(type(self).__file_path):
