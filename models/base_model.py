@@ -24,7 +24,8 @@ class BaseModel:
 
     def __str__(self):
         """returns a readable string"""
-        return "[BaseModel] ({}) {}".format(self.id, self.__dict__)
+        return "[{}] ({}) {}".format(
+            str(type(self).__name__), self.id, str(self.__dict__))
 
     def save(self):
         """updates updated_at"""
@@ -34,8 +35,8 @@ class BaseModel:
     def to_dict(self):
         """returns a dictionary containing all keys/values"""
         new_dict = {}
-        self.created_at = self.created_at.isoformat()
-        self.updated_at = self.updated_at.isoformat()
-        new_dict = self.__dict__
-        new_dict['__class__'] = self.__class__.__name__
+        new_dict.update(self.__dict__)
+        new_dict['__class__'] = str(type(self).__name__)
+        new_dict['created_at'] = self.created_at.isoformat()
+        new_dict['updated_at'] = self.updated_at.isoformat()
         return new_dict
