@@ -19,21 +19,21 @@ class FileStorage:
 
     def new(self, obj):
         """"""
-        key = "{}.{}".format(str(type(obj).__name__), obj.id)
         FileStorage.__objects[key] = obj
 
     def save(self):
+        """"""
         new_dict = {}
         for key, obj in FileStorage.__objects.items():
             new_dict[key] = obj.to_dict()
-        with open(FileStorage.__file_path, "w") as f:
+        with open(self.__file_path, "w") as f:
             json.dump(new_dict, f)
 
     def reload(self):
         """"""
         load_dict = {}
         try:
-            with open(FileStorage.__file_path, "r") as f:
+            with open(self.__file_path, "r") as f:
                 load_dict = json.load(f)
                 for key, value in load_dict.items():
                     obj = eval(value['__class__'])(**value)

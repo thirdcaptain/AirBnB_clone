@@ -1,0 +1,8 @@
+#!/usr/bin/python3
+
+import file_storage.py
+storage = FileStorage()
+Filestorage.reload(storage)
+
+string = "{}.{}".format(obj.__class__.name, obj.id)
+__objects[string] = obj.__dict__

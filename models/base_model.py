@@ -4,7 +4,6 @@ import uuid
 from datetime import datetime
 import models
 
-
 class BaseModel:
     """writing a base class"""
 
@@ -33,6 +32,7 @@ class BaseModel:
 
     def to_dict(self):
         """returns a dictionary containing all keys/values"""
+
         new_dict = {}
         self.created_at = self.created_at.isoformat()
         self.updated_at = self.updated_at.isoformat()
