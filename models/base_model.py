@@ -4,7 +4,6 @@ import uuid
 from datetime import datetime
 import models
 
-
 class BaseModel:
     """writing a base class"""
 
@@ -34,6 +33,7 @@ class BaseModel:
 
     def to_dict(self):
         """returns a dictionary containing all keys/values"""
+
         new_dict = {}
         new_dict.update(self.__dict__)
         new_dict['__class__'] = str(type(self).__name__)
