@@ -7,7 +7,7 @@ import os
 import datetime
 
 
-class TestBaseMethods(unittest.TestCase):
+class TestBaseModelMethods(unittest.TestCase):
     """class with tests"""
 
     def test_pep8_conformance(self):
@@ -45,3 +45,12 @@ class TestBaseMethods(unittest.TestCase):
         my_model_json = my_model.to_dict()
         for key in my_model_json:
             self.assertNotIsInstance(my_model_json[key], datetime.datetime)
+
+    def test_save(self):
+        """check if it saves changes"""
+
+        my_model = BaseModel()
+        my_model.name = "Holberton"
+        my_model.my_number = 89
+        my_model.save()
+        self.assertTrue(os.path.isfile('file.json'))
