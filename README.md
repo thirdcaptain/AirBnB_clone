@@ -1,16 +1,19 @@
 # AirBnB_clone
 
+![hbnb](https://camo.githubusercontent.com/a0c52a69dc410e983b8c63fa4aa57e83cb4157cd/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f696e7472616e65742d70726f6a656374732d66696c65732f686f6c626572746f6e7363686f6f6c2d6869676865722d6c6576656c5f70726f6772616d6d696e672b2f3236332f4842544e2d68626e622d46696e616c2e706e67)
+
 ## Table of Contents
 
-* [Description & Purpose](#description-purpose)
+* [Description](#description)
 * [Usage](#usage)
+* [Examples](#examples)
 * [Commands](#commands)
 * [Bugs](#bugs)
 * [Authors](#authors)
 * [License](#license)
 
 
-## Description & Purpose
+## Description
 
 **hbnb** - Holberton BnB is a clone AirBnB, a student project to introduce and develop familiarity with the components of a full web application. Currently, the scope of the application acts as a command interpreter that can create, retrieve, update and delete objects.
 
@@ -26,6 +29,50 @@ or to use the non-interactive mode run:
 
 ```
 echo "your-command-here" | ./console.py
+```
+
+## Usage Examples
+
+### Interactive Mode
+
+```
+$ ./console.py
+(hbnb) help
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+
+(hbnb) 
+(hbnb) 
+(hbnb) quit
+$
+```
+
+### Non-Interactive Mode
+
+```c
+$ echo "help" | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb)
+$
+$ cat test_help
+help
+$
+$ cat test_help | ./console.py
+(hbnb)
+
+##Commands
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+$
 ```
 
 Commands | Description | Usage
