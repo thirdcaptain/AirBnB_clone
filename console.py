@@ -4,6 +4,8 @@ import sys
 from models.base_model import BaseModel
 from models import storage
 import json
+from models.engine.file_storage import FileStorage
+
 
 class HBNBCommand(cmd.Cmd):
     """"""
@@ -42,8 +44,6 @@ class HBNBCommand(cmd.Cmd):
         """prints representation of an object
         """
         argv = arg.split()
-        input("arguments")
-        print(argv)
         if len(argv) == 0:
             print("** class name missing **")
         elif argv[0] not in ["BaseModel"]:
@@ -56,16 +56,63 @@ class HBNBCommand(cmd.Cmd):
                 with open("file.json", "r") as f:
                     load_dict = json.load(f)
                     for key, value in load_dict.items():
-                        input("key argum")
                         name_id = key.split('.')
-
-                        print(name_id)
-
                         if name_id == argv:
-                            print(value)
+                            print("[{}] ({}) {}".
+                                  format(argv[0], argv[1], value))
                             return
-                    print("** no instance found *")
+                    print("** no instance found **")
             except:
                 pass
+
+    def do_destroy(self, arg):
+        """destroys the instance, but saves the changes in JSON file
+        """
+        argv = arg.split()
+        if len(argv) == 0:
+            print("** class name missing **")
+        elif argv[0] not in ["BaseModel"]:
+            print("** class doesn't exist **")
+        elif len(argv) == 1:
+            print("** instance id missing **")
+        else:
+            store = storage.all()
+            key = "{}.{}".format(argv[0], argv[1])
+            print(store)
+            if key in store:
+                del store[key]
+            print(store)
+            storage.save()
+
+    def do_all(self, arg):
+        """Prints all string representation of all instances
+        """
+        argv = arg.split()
+        if len(argv) < 2:
+            try:
+                load_dict = {}
+                list_of_all = []
+                insta_str = ""
+                with open("file.json", "r") as f:
+                    load_dict = json.load(f)
+                for key, value in load_dict.items():
+                    name_id = key.split('.')
+                    if len(argv) == 1:
+                        if name_id[0] == argv[0]:
+                            insta_str = "[{}] ({}) {}".format(name_id[0],
+                                                              name_id[1], value)
+                            list_of_all.append(insta_str)
+                        else:
+                            print("** class doesn't exist **")
+                            return
+                    else:
+                        insta_str = "[{}] ({}) {}".format(name_id[0],
+                                                          name_id[1], value)
+                        list_of_all.append(insta_str)
+                print(list_of_all)
+                return
+            except:
+                pass
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
