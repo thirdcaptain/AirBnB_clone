@@ -13,6 +13,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
+
 class HBNBCommand(cmd.Cmd):
     """"""
     prompt = '(hbnb) '
@@ -105,7 +106,6 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, arg):
         """update instance attribute based on class name and id
         """
-        #argv = arg.split()
         argv = shlex.split(arg)
         if len(argv) < 5:
             if len(argv) == 0:
@@ -126,7 +126,6 @@ class HBNBCommand(cmd.Cmd):
                     storage.save()
                 else:
                     print("** no instance found **")
-                    #storage.save()
 
 
 if __name__ == '__main__':
