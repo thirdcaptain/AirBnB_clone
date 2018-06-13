@@ -9,6 +9,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
+
 class FileStorage:
     """a new class that serializes instances to a JSON file and back"""
     __file_path = "file.json"
@@ -44,6 +45,6 @@ class FileStorage:
                 for key, value in load_dict.items():
                     obj = eval(value['__class__'])(**value)
                     FileStorage.__objects[key] = obj
-        except:
+        except BaseException:
             pass
         #       if os.path.isfile(type(self).__file_path):
