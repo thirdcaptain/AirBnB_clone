@@ -4,6 +4,7 @@ import sys
 from models.base_model import BaseModel
 from models import storage
 import json
+import shlex
 from models.engine.file_storage import FileStorage
 
 
@@ -111,6 +112,32 @@ class HBNBCommand(cmd.Cmd):
                 return
             except:
                 pass
+
+    def do_update(self, arg):
+        """update instance attribute based on class name and id
+        """
+        #argv = arg.split()
+        argv = shlex.split(arg)
+        if len(argv) < 5:
+            if len(argv) == 0:
+                print("** class name missing **")
+            elif argv[0] not in ["BaseModel"]:
+                print("** class doesn't exist **")
+            elif len(argv) == 1:
+                print("** instance id missing **")
+            elif len(argv) == 2:
+                print("** attribute name missing **")
+            elif len(argv) == 3:
+                print("** value missing **")
+            else:
+                store = storage.all()
+                key = "{}.{}".format(argv[0], argv[1])
+                if key in store:
+                    setattr(store[key], argv[2], argv[3])
+                    storage.save()
+                else:
+                    print("** no instance found **")
+                    #storage.save()
 
 
 if __name__ == '__main__':
