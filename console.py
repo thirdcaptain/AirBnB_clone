@@ -81,32 +81,21 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """Prints all string representation of all instances
         """
-        argv = arg.split()
-        if len(argv) < 2:
-            try:
-                load_dict = {}
-                list_of_all = []
-                insta_str = ""
-                with open("file.json", "r") as f:
-                    load_dict = json.load(f)
-                for key, value in load_dict.items():
-                    name_id = key.split('.')
-                    if len(argv) == 1:
-                        if name_id[0] == argv[0]:
-                            insta_str = "[{}] ({}) {}".format(
-                                name_id[0], name_id[1], value)
-                            list_of_all.append(insta_str)
-                        else:
-                            print("** class doesn't exist **")
-                            return
-                    else:
-                        insta_str = "[{}] ({}) {}".format(name_id[0],
-                                                          name_id[1], value)
-                        list_of_all.append(insta_str)
-                print(list_of_all)
-                return
-            except:
-                pass
+        objects = storage.all()
+        object_list = []
+        if not arg:
+            for key in objects:
+                object_list.append(str(objects[key]))
+            print(object_list)
+            return
+        argv = arg.split(" ")
+        if argv[0] in self.class_list:
+            for key in objects:
+                if key[0:len(argv[0])] == argv[0]:
+                    object_list.append(str(objects[key]))
+            print(object_list)
+        else:
+            print("** class doesn't exist **")
 
     def do_update(self, arg):
         """update instance attribute based on class name and id
