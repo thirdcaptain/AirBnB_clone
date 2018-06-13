@@ -13,9 +13,7 @@ class BaseModel:
         """constructor"""
         if kwargs:
             for key, value in kwargs.items():
-                if key == 'created_at':
-                    value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
-                if key == 'updated_at':
+                if key in ['created_at', 'updated_at']:
                     value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
                 if key != "__class__":
                     setattr(self, key, value)
@@ -27,7 +25,8 @@ class BaseModel:
 
     def __str__(self):
         """returns a readable string"""
-        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(type(self).__name__, self.id,
+                                     self.__dict__)
 
     def save(self):
         """updates updated_at"""
