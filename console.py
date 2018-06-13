@@ -5,12 +5,14 @@ from models.base_model import BaseModel
 from models import storage
 import json
 import shlex
+from models.user import User
 from models.engine.file_storage import FileStorage
 
 
 class HBNBCommand(cmd.Cmd):
     """"""
     prompt = '(hbnb) '
+    class_list = {"BaseModel", "User"}
 
     def emptyline(self):
         """doesn't do anything when type Enter
@@ -34,7 +36,7 @@ class HBNBCommand(cmd.Cmd):
         argv = arg.split()
         if len(argv) == 0:
             print("** class name missing **")
-        elif argv[0] not in ["BaseModel"]:
+        elif argv[0] not in self.class_list:
             print("** class doesn't exist **")
         else:
             new_model = eval(argv[0])()
@@ -47,24 +49,17 @@ class HBNBCommand(cmd.Cmd):
         argv = arg.split()
         if len(argv) == 0:
             print("** class name missing **")
-        elif argv[0] not in ["BaseModel"]:
+        elif argv[0] not in self.class_list:
             print("** class doesn't exist **")
         elif len(argv) == 1:
             print("** instance id missing **")
         else:
-            try:
-                load_dict = {}
-                with open("file.json", "r") as f:
-                    load_dict = json.load(f)
-                    for key, value in load_dict.items():
-                        name_id = key.split('.')
-                        if name_id == argv:
-                            print("[{}] ({}) {}".
-                                  format(argv[0], argv[1], value))
-                            return
-                    print("** no instance found **")
-            except:
-                pass
+            objects = storage.all()
+            key = argv[0] + "." + argv[1]
+            if key in objects:
+                print(objects[key])
+            else:
+                print("** no instance found **")
 
     def do_destroy(self, arg):
         """destroys the instance, but saves the changes in JSON file
@@ -72,7 +67,7 @@ class HBNBCommand(cmd.Cmd):
         argv = arg.split()
         if len(argv) == 0:
             print("** class name missing **")
-        elif argv[0] not in ["BaseModel"]:
+        elif argv[0] not in self.class_list:
             print("** class doesn't exist **")
         elif len(argv) == 1:
             print("** instance id missing **")
@@ -121,7 +116,7 @@ class HBNBCommand(cmd.Cmd):
         if len(argv) < 5:
             if len(argv) == 0:
                 print("** class name missing **")
-            elif argv[0] not in ["BaseModel"]:
+            elif argv[0] not in self.class_list:
                 print("** class doesn't exist **")
             elif len(argv) == 1:
                 print("** instance id missing **")
