@@ -97,8 +97,8 @@ class HBNBCommand(cmd.Cmd):
                     name_id = key.split('.')
                     if len(argv) == 1:
                         if name_id[0] == argv[0]:
-                            insta_str = "[{}] ({}) {}".format(name_id[0],
-                                                              name_id[1], value)
+                            insta_str = "[{}] ({}) {}".format(
+                                name_id[0], name_id[1], value)
                             list_of_all.append(insta_str)
                         else:
                             print("** class doesn't exist **")
@@ -111,6 +111,7 @@ class HBNBCommand(cmd.Cmd):
                 return
             except:
                 pass
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
