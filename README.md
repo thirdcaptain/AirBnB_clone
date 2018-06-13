@@ -4,16 +4,16 @@
 
 ## Table of Contents
 
-* [Description & Purpose](#description-purpose)
+* [Description](#description)
 * [Usage](#usage)
-* [Commands](#commands)
 * [Examples](#examples)
+* [Commands](#commands)
 * [Bugs](#bugs)
 * [Authors](#authors)
 * [License](#license)
 
 
-## Description & Purpose
+## Description
 
 **hbnb** - Holberton BnB is a clone AirBnB, a student project to introduce and develop familiarity with the components of a full web application. Currently, the scope of the application acts as a command interpreter that can create, retrieve, update and delete objects.
 
@@ -35,7 +35,7 @@ echo "your-command-here" | ./console.py
 
 ### Interactive Mode
 
-```c
+```
 $ ./console.py
 (hbnb) help
 
@@ -65,6 +65,8 @@ help
 $
 $ cat test_help | ./console.py
 (hbnb)
+
+##Commands
 
 Documented commands (type help <topic>):
 ========================================
