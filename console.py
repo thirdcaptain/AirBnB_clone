@@ -78,10 +78,8 @@ class HBNBCommand(cmd.Cmd):
         else:
             store = storage.all()
             key = "{}.{}".format(argv[0], argv[1])
-            print(store)
             if key in store:
                 del store[key]
-            print(store)
             storage.save()
 
     def do_all(self, arg):
