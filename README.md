@@ -1,4 +1,4 @@
-# AirBnb_clone
+# AirBnB_clone
 
 ## Table of Contents
 
