@@ -30,7 +30,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_create(self, arg):
-        """createsa new instance of BaseModel,
+        """creates a new instance of BaseModel,
         saves it (to the JSON file) and prints the id
         """
         argv = arg.split()
@@ -88,7 +88,7 @@ class HBNBCommand(cmd.Cmd):
                 object_list.append(str(objects[key]))
             print(object_list)
             return
-        argv = arg.split(" ")
+        argv = arg.split()
         if argv[0] in self.class_list:
             for key in objects:
                 if key[0:len(argv[0])] == argv[0]:
