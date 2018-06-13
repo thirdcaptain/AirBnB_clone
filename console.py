@@ -7,12 +7,17 @@ import json
 import shlex
 from models.user import User
 from models.engine.file_storage import FileStorage
-
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """"""
     prompt = '(hbnb) '
-    class_list = {"BaseModel", "User"}
+    class_list = {"BaseModel", "User", "State", "City", "Place",
+                  "Amenity", "Review"}
 
     def emptyline(self):
         """doesn't do anything when type Enter
