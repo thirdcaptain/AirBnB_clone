@@ -18,22 +18,22 @@
 
 To launch the console application in interactive mode simply run:
 
-'''
+```
 console.py
-'''
+```
 
 or to use the non-interactive mode run:
 
-'''
+```
 echo "your-command-here" | ./console.py
-'''
+```
 
 Commands | Description | Usage
 -------- | ----------- |-------- |
-**help** | Displays the documented commands. | **help**
-**quit** | Exits the program. | **quit**
-**EOF**  | Ends the program.  | N/A
-**create** | Creates a new instance of a class | create \<classname\>
+**help** | Displays the documented commands | **help**
+**quit** | Exits the program | **quit**
+**EOF**  | Ends the program  | N/A
+**create** | Creates a new instance of a class | **create** \<classname\>
 **show** | Prints a string representation based on class name and id | **show** \<classname\> \<id\>
 **destroy** | Delete an instance based on class name and id | **destroy** \<classname\> \<id\>
 **all** | Prints a string representation of all instances, or all instances based on class name | **all** or **all** \<classname\>
