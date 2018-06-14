@@ -132,6 +132,7 @@ class HBNBCommand(cmd.Cmd):
     def default(self, arg):
         """retrieve all instances of a class
         """
+        count = 0
         object_list = []
         objects = storage.all()
         argv = arg.split(".")
@@ -139,8 +140,11 @@ class HBNBCommand(cmd.Cmd):
             for key, value in objects.items():
                 keys = key.split(".")
                 if keys[0] == argv[0]:
+                    count += 1
                     object_list.append("{}".format(value))
-            print("[" + ', '.join(map(str, object_list)) + "]")
-
+            if argv[1] == "all()":
+                print("[" + ', '.join(map(str, object_list)) + "]")
+            if argv[1] == "count()":
+                print(count)
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
