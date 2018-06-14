@@ -45,6 +45,9 @@ class TestBaseModelMethods(unittest.TestCase):
         my_model_json = my_model.to_dict()
         for key in my_model_json:
             self.assertNotIsInstance(my_model_json[key], datetime.datetime)
+        self.assertIsInstance(my_model_json['created_at'], str)
+        self.assertIsInstance(my_model_json['updated_at'], str)
+        self.assertEqual(my_model.__class__.__name__, 'BaseModel')
 
     def test_save(self):
         """check if it saves changes"""
@@ -54,7 +57,7 @@ class TestBaseModelMethods(unittest.TestCase):
         my_model.my_number = 89
         my_model.save()
         self.assertTrue(os.path.isfile('file.json'))
-
+        self.assertNotEqual(my_model.created_at, my_model.updated_at)
     def test_hasattribute(self):
         """check attributes of BaseModel
         """
@@ -63,3 +66,7 @@ class TestBaseModelMethods(unittest.TestCase):
         self.assertTrue(hasattr(my_model, "created_at"))
         self.assertTrue(hasattr(my_model, "updated_at"))
         self.assertTrue(hasattr(my_model, "id"))
+
+    def test_init(self):
+        my_model = BaseModel()
+        self.assertTrue(isinstance(my_model, BaseModel))
