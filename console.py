@@ -147,6 +147,17 @@ class HBNBCommand(cmd.Cmd):
                         print(objects[key])
                     else:
                         print("** no instance found **")
+            if argv[1][0:7] == "destroy":
+                i_d = argv[1][argv[1].index("(") + 1:argv[1].rindex(")")]
+                if not i_d:
+                    print("** instance id missing **")
+                else:
+                    key = argv[0] + "." + i_d
+                    if key in objects:
+                        del objects[key]
+                    else:
+                        print("** no instance found **")
+
             for key, value in objects.items():
                 keys = key.split(".")
                 if keys[0] == argv[0]:
