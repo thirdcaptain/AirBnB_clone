@@ -58,6 +58,7 @@ class TestBaseModelMethods(unittest.TestCase):
         my_model.save()
         self.assertTrue(os.path.isfile('file.json'))
         self.assertNotEqual(my_model.created_at, my_model.updated_at)
+
     def test_hasattribute(self):
         """check attributes of BaseModel
         """
@@ -68,5 +69,6 @@ class TestBaseModelMethods(unittest.TestCase):
         self.assertTrue(hasattr(my_model, "id"))
 
     def test_init(self):
+        """tests initialization"""
         my_model = BaseModel()
         self.assertTrue(isinstance(my_model, BaseModel))
