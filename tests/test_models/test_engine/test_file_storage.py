@@ -67,11 +67,10 @@ class TestFileStorageMethods(unittest.TestCase):
 
         my_model = FileStorage()
         with open("file.json", "w") as f:
-            f.write("{isaaac}")
+            f.write("{}")
         with open("file.json", "r") as s:
             for line in s:
-                self.assertEqual(line, "{isaaac}")
+                self.assertEqual(line, "{}")
         self.assertIs(my_model.reload(), None)
-
 if __name__ == "__main__":
     unittest.main()
