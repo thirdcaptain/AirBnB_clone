@@ -27,12 +27,14 @@ class TestFileStorageMethods(unittest.TestCase):
 
     def setUp(self):
         """setting up"""
-        self.file = models.storage._FileStorage__file_path
+        pass
 
     def tearDown(self):
         """cleaning after"""
-        if os.path.exists(self.file):
-            os.remove(self.file)
+        try:
+            os.remove("file.json")
+        except:
+            pass
 
     def test_doc(self):
         """testing docstrings"""
@@ -43,18 +45,31 @@ class TestFileStorageMethods(unittest.TestCase):
         self.assertIsNotNone(FileStorage.new.__doc__)
         self.assertIsNotNone(FileStorage.reload.__doc__)
 
-    def test_save(self):
-        """check if it saves changes"""
-
-        my_model = FileStorage()
-        my_model.name = "Holberton"
-        my_model.my_number = 89
-        my_model.save()
-        self.assertTrue(os.path.isfile('file.json'))
-
     def test_all(self):
         """test method all"""
         my_model = FileStorage()
         my_model_dict = my_model.all()
         self.assertIsNotNone(my_model_dict)
         self.assertEqual(type(my_model_dict), dict)
+        self.assertIs(my_model_dict, my_model._FileStorage__objects)
+
+    def test_new(self):
+
+        my_model = FileStorage()
+        my_model_dict = my_model.all()
+        isaac = User()
+        isaac.id = 666
+        isaac.name = "Leviathan"
+        my_model.new(isaac)
+        key = "{}.{}".format(isaac.__class__.__name__, isaac.id)
+        self.assertIsNotNone(my_model_dict[key])
+
+    def test_reload(self):
+
+        my_model = FileStorage()
+        with open("file.json", "w") as f:
+            f.write("{isaaac}")
+        with open("file.json", "r") as s:
+            for line in s:
+                self.assertEqual(line, "{isaaac}")
+        self.assertIs(my_model.reload(), None)
