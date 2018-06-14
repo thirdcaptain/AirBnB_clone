@@ -129,6 +129,18 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     print("** no instance found **")
 
+    def default(self, arg):
+        """retrieve all instances of a class
+        """
+        object_list = []
+        objects = storage.all()
+        argv = arg.split(".")
+        if argv[0] in self.class_list:
+            for key, value in objects.items():
+                keys = key.split(".")
+                if keys[0] == argv[0]:
+                    object_list.append("{}".format(value))
+            print("[" + ', '.join(map(str, object_list)) + "]")
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
