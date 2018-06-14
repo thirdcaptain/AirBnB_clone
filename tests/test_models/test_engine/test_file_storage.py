@@ -72,3 +72,6 @@ class TestFileStorageMethods(unittest.TestCase):
             for line in s:
                 self.assertEqual(line, "{isaaac}")
         self.assertIs(my_model.reload(), None)
+
+if __name__ == "__main__":
+    unittest.main()

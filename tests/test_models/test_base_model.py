@@ -1,10 +1,11 @@
 #!/usr/bin/python3
+"""unit test for BaseModel class
+"""
 import pep8
 from models.base_model import BaseModel
 import unittest
 import json
 import os
-import datetime
 
 
 class TestBaseModelMethods(unittest.TestCase):
@@ -14,7 +15,7 @@ class TestBaseModelMethods(unittest.TestCase):
         """Test that we conform to PEP8."""
         pep8style = pep8.StyleGuide(quiet=True)
         result = pep8style.check_files(['models/base_model.py'])
-        self.assertEqual(result.total_errors, 0)
+        self.assertEqual(result.total_errors, 0, "fix pep8")
 
     def setUp(self):
         """setting up"""
@@ -39,12 +40,7 @@ class TestBaseModelMethods(unittest.TestCase):
         """checking classes of the dict"""
 
         my_model = BaseModel()
-        my_model.name = "Holberton"
-        my_model.my_number = 89
-        my_model.save()
         my_model_json = my_model.to_dict()
-        for key in my_model_json:
-            self.assertNotIsInstance(my_model_json[key], datetime.datetime)
         self.assertIsInstance(my_model_json['created_at'], str)
         self.assertIsInstance(my_model_json['updated_at'], str)
         self.assertEqual(my_model.__class__.__name__, 'BaseModel')
@@ -53,8 +49,6 @@ class TestBaseModelMethods(unittest.TestCase):
         """check if it saves changes"""
 
         my_model = BaseModel()
-        my_model.name = "Holberton"
-        my_model.my_number = 89
         my_model.save()
         self.assertTrue(os.path.isfile('file.json'))
         self.assertNotEqual(my_model.created_at, my_model.updated_at)
@@ -72,3 +66,6 @@ class TestBaseModelMethods(unittest.TestCase):
         """tests initialization"""
         my_model = BaseModel()
         self.assertTrue(isinstance(my_model, BaseModel))
+
+if __name__ == "__main__":
+    unittest.main()

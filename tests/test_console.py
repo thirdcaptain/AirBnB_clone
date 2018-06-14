@@ -24,3 +24,6 @@ class TestConsole(unittest.TestCase):
         """
         name = self.create()
         self.assertTrue(name.onecmd("quit"))
+
+if __name__ == "__main__":
+    unittest.main()
