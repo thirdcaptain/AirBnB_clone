@@ -15,21 +15,17 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
-    def __init__(self, *args, **kwargs):
-        """constructor"""
-        pass
-
     def all(self):
-        """"""
+        """returns all objects from the storage"""
         return FileStorage.__objects
 
     def new(self, obj):
-        """"""
+        """set the objects in the storage in a specific order"""
         key = "{}.{}".format(str(type(obj).__name__), obj.id)
         FileStorage.__objects[key] = obj
 
     def save(self):
-        """"""
+        """saves the changes to a json file"""
         new_dict = {}
         for key, obj in FileStorage.__objects.items():
             new_dict[key] = obj.to_dict()
@@ -37,7 +33,7 @@ class FileStorage:
             json.dump(new_dict, f)
 
     def reload(self):
-        """"""
+        """get the instance from a JSON file"""
         load_dict = {}
         try:
             with open(self.__file_path, "r") as f:
@@ -45,6 +41,5 @@ class FileStorage:
                 for key, value in load_dict.items():
                     obj = eval(value['__class__'])(**value)
                     FileStorage.__objects[key] = obj
-        except BaseException:
+        except:
             pass
-        #       if os.path.isfile(type(self).__file_path):
