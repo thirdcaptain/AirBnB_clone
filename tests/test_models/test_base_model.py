@@ -54,3 +54,12 @@ class TestBaseModelMethods(unittest.TestCase):
         my_model.my_number = 89
         my_model.save()
         self.assertTrue(os.path.isfile('file.json'))
+
+    def test_hasattribute(self):
+        """check attributes of BaseModel
+        """
+        my_model = BaseModel()
+        self.assertTrue(hasattr(my_model, "__init__"))
+        self.assertTrue(hasattr(my_model, "created_at"))
+        self.assertTrue(hasattr(my_model, "updated_at"))
+        self.assertTrue(hasattr(my_model, "id"))
