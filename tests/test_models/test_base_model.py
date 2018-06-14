@@ -72,3 +72,6 @@ class TestBaseModelMethods(unittest.TestCase):
         """tests initialization"""
         my_model = BaseModel()
         self.assertTrue(isinstance(my_model, BaseModel))
+
+if __name__ == "__main__":
+    unittest.main()
