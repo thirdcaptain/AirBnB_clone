@@ -41,5 +41,5 @@ class FileStorage:
                 for key, value in load_dict.items():
                     obj = eval(value['__class__'])(**value)
                     FileStorage.__objects[key] = obj
-        except:
+        except FileNotFoundError:
             pass
