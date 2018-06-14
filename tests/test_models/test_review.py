@@ -7,6 +7,7 @@ import pep8
 import os
 import unittest
 
+
 class TestReview(unittest.TestCase):
     """tests Review"""
 
@@ -21,6 +22,7 @@ class TestReview(unittest.TestCase):
         self.assertIsNotNone(Review.__doc__)
 
     def test_hasattribute(self):
+        """tests attributes"""
         my_model = Review()
         self.assertTrue(hasattr(my_model, "__init__"))
         self.assertTrue(hasattr(my_model, "created_at"))

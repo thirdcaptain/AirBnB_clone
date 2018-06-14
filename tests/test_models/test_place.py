@@ -7,6 +7,7 @@ import pep8
 import os
 import unittest
 
+
 class TestPlace(unittest.TestCase):
     """tests Place"""
 
@@ -21,6 +22,7 @@ class TestPlace(unittest.TestCase):
         self.assertIsNotNone(Place.__doc__)
 
     def test_hasattribute(self):
+        """test attributes"""
         my_model = Place()
         self.assertTrue(hasattr(my_model, "__init__"))
         self.assertTrue(hasattr(my_model, "created_at"))

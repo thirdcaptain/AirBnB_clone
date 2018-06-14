@@ -7,6 +7,7 @@ import pep8
 import os
 import unittest
 
+
 class TestAmenity(unittest.TestCase):
     """tests Amenity"""
 
@@ -21,6 +22,7 @@ class TestAmenity(unittest.TestCase):
         self.assertIsNotNone(Amenity.__doc__)
 
     def test_hasattribute(self):
+        """tests attributes"""
         my_model = Amenity()
         self.assertTrue(hasattr(my_model, "__init__"))
         self.assertTrue(hasattr(my_model, "created_at"))

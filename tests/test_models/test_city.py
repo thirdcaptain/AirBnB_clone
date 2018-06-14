@@ -7,6 +7,7 @@ import pep8
 import os
 import unittest
 
+
 class TestCity(unittest.TestCase):
     """tests City"""
 
@@ -21,6 +22,7 @@ class TestCity(unittest.TestCase):
         self.assertIsNotNone(City.__doc__)
 
     def test_hasattribute(self):
+        """tests attributes"""
         my_model = City()
         self.assertTrue(hasattr(my_model, "__init__"))
         self.assertTrue(hasattr(my_model, "created_at"))
