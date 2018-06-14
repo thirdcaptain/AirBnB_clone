@@ -82,7 +82,9 @@ class HBNBCommand(cmd.Cmd):
             key = "{}.{}".format(argv[0], argv[1])
             if key in store:
                 del store[key]
-            storage.save()
+                storage.save()
+            else:
+                print("** no instance found **")
 
     def do_all(self, arg):
         """Prints all string representation of all instances
