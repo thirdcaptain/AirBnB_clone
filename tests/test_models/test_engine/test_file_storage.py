@@ -39,7 +39,6 @@ class TestFileStorageMethods(unittest.TestCase):
     def test_doc(self):
         """testing docstrings"""
         self.assertIsNotNone(FileStorage.__doc__)
-        self.assertIsNotNone(FileStorage.__init__.__doc__)
         self.assertIsNotNone(FileStorage.all.__doc__)
         self.assertIsNotNone(FileStorage.save.__doc__)
         self.assertIsNotNone(FileStorage.new.__doc__)
