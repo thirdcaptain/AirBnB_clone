@@ -137,6 +137,16 @@ class HBNBCommand(cmd.Cmd):
         objects = storage.all()
         argv = arg.split(".")
         if argv[0] in self.class_list:
+            if argv[1][0:4] == "show":
+                i_d = argv[1][argv[1].index("(") + 1:argv[1].rindex(")")]
+                if not i_d:
+                    print("** instance id missing **")
+                else:
+                    key = argv[0] + "." + i_d
+                    if key in objects:
+                        print(objects[key])
+                    else:
+                        print("** no instance found **")
             for key, value in objects.items():
                 keys = key.split(".")
                 if keys[0] == argv[0]:
@@ -146,5 +156,6 @@ class HBNBCommand(cmd.Cmd):
                 print("[" + ', '.join(map(str, object_list)) + "]")
             if argv[1] == "count()":
                 print(count)
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
