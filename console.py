@@ -158,6 +158,21 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         print("** no instance found **")
 
+            if argv[1][0:6] == "update":
+                i_d = argv[1][argv[1].index("(") + 1:argv[1].rindex(")")]
+                if not i_d:
+                    print("** instance id missing **")
+                else:
+                    i_d = i_d.replace('\"', '')
+                    _id = i_d.split(", ")
+                    _id, attribute, value = _id
+                    key = argv[0] + "." + _id
+                    if key in objects:
+                        setattr(objects[key], attribute, value)
+                        storage.save()
+                    else:
+                        print("** no instance found **")
+
             for key, value in objects.items():
                 keys = key.split(".")
                 if keys[0] == argv[0]:
