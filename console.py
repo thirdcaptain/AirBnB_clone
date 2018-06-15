@@ -163,16 +163,47 @@ class HBNBCommand(cmd.Cmd):
                 if not i_d:
                     print("** instance id missing **")
                 else:
-                    i_d = i_d.replace('\"', '')
                     _id = i_d.split(", ")
+                    print(_id)
+                    _id[0] = _id[0].replace('\"', '')
+                    key = argv[0] + "." + _id[0]
+                    if type(_id[1]) is dict:
+                        input("type")
+                        print(type(_id[1]))
+                        for keys, value in _id[1].items():
+                            input("keys")
+                            print(keys)
+                            input("value")
+                            print(value)
+                            input("obj")
+                            print(objects[key])
+                            setattr(objects[key], keys, value)
+                            storage.save()
+                            return
+                    i_d = i_d.replace('\"', '')
+                    input("i_d if not")
+                    print(i_d)
+
+                    _id = i_d.split(", ")
+                    input("_id split")
+                    print(_id)
+                    input("id's")
+                    print(_id[0])
+                    print(_id[2])
+                    print(_id[1])
+
                     _id, attribute, value = _id
-                    key = argv[0] + "." + _id
+                    input("keys")
+                    print(_id)
+                    input("value")
+                    print(value)
+                    input("obj")
+                    print(attribute)
                     if key in objects:
                         setattr(objects[key], attribute, value)
                         storage.save()
                     else:
                         print("** no instance found **")
-
             for key, value in objects.items():
                 keys = key.split(".")
                 if keys[0] == argv[0]:
@@ -182,6 +213,7 @@ class HBNBCommand(cmd.Cmd):
                 print("[" + ', '.join(map(str, object_list)) + "]")
             if argv[1] == "count()":
                 print(count)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
