@@ -132,6 +132,8 @@ class HBNBCommand(cmd.Cmd):
     def default(self, arg):
         """retrieve all instances of a class
         """
+        a = b = c = ""
+        counter = 0
         count = 0
         object_list = []
         objects = storage.all()
@@ -160,50 +162,39 @@ class HBNBCommand(cmd.Cmd):
 
             if argv[1][0:6] == "update":
                 i_d = argv[1][argv[1].index("(") + 1:argv[1].rindex(")")]
-                if not i_d:
-                    print("** instance id missing **")
-                else:
-                    _id = i_d.split(", ")
-                    print(_id)
-                    _id[0] = _id[0].replace('\"', '')
-                    key = argv[0] + "." + _id[0]
-                    if type(_id[1]) is dict:
-                        input("type")
-                        print(type(_id[1]))
-                        for keys, value in _id[1].items():
-                            input("keys")
-                            print(keys)
-                            input("value")
-                            print(value)
-                            input("obj")
-                            print(objects[key])
-                            setattr(objects[key], keys, value)
-                            storage.save()
+                if i_d:
+                    if i_d.find('{') != -1 and i_d.find('}') != -1:
+                        for c in i_d:
+                            counter += 1
+                            if c == ',':
+                                break
+                        counter -= 1
+                        a = i_d[:counter]
+                        counter += 2
+                        b = i_d[counter:]
+                        c = a + '=' + b
+                        _id = c.split('=')
+                        _id[0] = _id[0].replace('\"', '')
+                        key = argv[0] + "." + _id[0]
+                        if key in objects:
+                            for keys, value in eval(_id[1]).items():
+                                setattr(objects[key], keys, value)
+                                storage.save()
                             return
-                    i_d = i_d.replace('\"', '')
-                    input("i_d if not")
-                    print(i_d)
-
-                    _id = i_d.split(", ")
-                    input("_id split")
-                    print(_id)
-                    input("id's")
-                    print(_id[0])
-                    print(_id[2])
-                    print(_id[1])
-
-                    _id, attribute, value = _id
-                    input("keys")
-                    print(_id)
-                    input("value")
-                    print(value)
-                    input("obj")
-                    print(attribute)
-                    if key in objects:
-                        setattr(objects[key], attribute, value)
-                        storage.save()
+                        else:
+                            print("** no instance found **")
                     else:
-                        print("** no instance found **")
+                        i_d = i_d.replace('\"', '')
+                        _id = i_d.split(", ")
+                        key = argv[0] + "." + _id[0]
+                        _id, attribute, value = _id
+                        if key in objects:
+                            setattr(objects[key], attribute, value)
+                            storage.save()
+                        else:
+                            print("** no instance found **")
+                else:
+                    print("** instance id missing **")
             for key, value in objects.items():
                 keys = key.split(".")
                 if keys[0] == argv[0]:
