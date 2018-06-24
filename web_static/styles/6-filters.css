@@ -65,7 +65,7 @@
 	padding-top: 10%;
 	padding-bottom: 10%;
 	padding-left: 20%;
-	margin-top: 15px; /*hard coded to hit bottom of box*/
+	margin-top: 16px; /*hard coded to hit bottom of box*/
 }
 
 .popover li {
@@ -86,8 +86,10 @@
 
 .amenities:hover .popover {
 	display: block;
+	position: relative; /*makes the dropdown opaque & persist*/
 }
 
 .location:hover .popover {
 	display: block;
+	position: relative; /*makes the dropdown opaque & persist*/
 }
