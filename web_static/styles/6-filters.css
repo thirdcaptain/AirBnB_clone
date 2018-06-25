@@ -87,9 +87,11 @@
 .amenities:hover .popover {
 	display: block;
 	position: relative; /*makes the dropdown opaque & persist*/
+	z-index: 100;
 }
 
 .location:hover .popover {
 	display: block;
 	position: relative; /*makes the dropdown opaque & persist*/
+	z-index: 100;
 }

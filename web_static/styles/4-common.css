@@ -1,9 +1,18 @@
+html, /*add entire selector to fix footer*/
+.container {
+   margin:0;
+   padding:0;
+   height:100%;
+}
+
 body {
 	margin: 0px;
 	padding: 0px;
 	color: #484848;
 	font-size: 14px;
 	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	min-height: 100%; /*add to fix footer*/
+	position: relative; /*add to fix footer*/
 }
 
 .container {
